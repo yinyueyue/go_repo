@@ -3,8 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	var level int = 15
-	var totalLength int = level*2 - 1
+
+	var level int
+	_, _ = fmt.Scanln(&level)
+	var totalLength = level*2 - 1
 	fmt.Println("")
 	for i := 1; i <= level; i++ {
 		currentWidth := 2*i - 1
