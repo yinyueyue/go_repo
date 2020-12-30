@@ -31,6 +31,9 @@ func main() {
 	aa = new(int) //分配内存，如果没有这一行，会报panic错误
 	*aa = 10      //赋值
 	fmt.Println(*aa)
+
+	num := new(int) //类型为指针类型 *int
+	fmt.Printf("num的类型%T,num的值=%v,num的地址%v num指针指向的值=%v", num, num, &num, *num)
 }
 
 func aa(a *int) {

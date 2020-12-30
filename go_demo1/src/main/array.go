@@ -52,5 +52,37 @@ func main() {
 		fmt.Println(v)
 	}
 	fmt.Printf("%d", sum)
+	printA2Z()
+
+	maxNum([]int{12, 343, 5454, 65, 343, 32, 543, 5467568, 666})
+
+}
+
+func printA2Z() {
+	var chars [26]byte
+	for i := 0; i < 26; i++ {
+		chars[i] = 'A' + byte(i)
+	}
+	for _, char := range chars {
+		fmt.Println(string(char))
+	}
+}
+
+func maxNum(nums []int) {
+	var maxNum int
+	var index int
+	for i, num := range nums {
+		if i == 0 {
+			index = i
+			maxNum = num
+			continue
+		}
+		if num > maxNum {
+			index = i
+			maxNum = num
+		}
+	}
+
+	fmt.Printf("Max num index:%v, max num :%v", index, maxNum)
 
 }

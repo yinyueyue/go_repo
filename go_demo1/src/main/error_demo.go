@@ -6,6 +6,8 @@ import (
 
 func main() {
 	test1()
+	fmt.Println("execute go on")
+
 }
 
 //defer 特性
@@ -17,8 +19,12 @@ func main() {
 */
 func test1() {
 	defer func() {
+		err := recover()
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Println(recover()) //有效
-	}()
+	}() //调用匿名函数
 	defer recover()              //无效！ 因为异常而中断
 	defer fmt.Println(recover()) //无效！
 

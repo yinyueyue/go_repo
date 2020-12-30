@@ -2,9 +2,13 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 func main() {
+	// 字符串转整数
+	num, _ := strconv.Atoi("123")
+	fmt.Println(num)
 	changeString()
 	traversalString()
 
@@ -51,12 +55,13 @@ func changeString() {
 
 	fmt.Println(string(byteS2))
 
-	//对于中文汉字或其他复合语言，需要使用rune来处理
+	//对于中文汉字或其他复合语言，需要使用rune来处理,转换为rune类型的字符串
 	s3 := "今天天气真好啊"
 
 	runeS3 := []rune(s3)
 	runeS3[0] = '明'
 	fmt.Println(string(runeS3))
+
 }
 
 // 遍历字符串
