@@ -48,6 +48,7 @@ func main() {
 			%X  : 无符号十六进制整数(字母大写，不像上面指针那样补零)
 	*/
 	var aa = [5]int{1, 2, 3, 4, 5}
+
 	var sliceA1 = aa[2:cap(aa)]
 	fmt.Println()
 	fmt.Printf("%v", sliceA1)
@@ -71,6 +72,7 @@ func main() {
 	s11 := []int{0, 1, 2, 3, 8: 100} // 通过初始化表达式构造，可使用索引号。
 	fmt.Println(s11, len(s11), cap(s11))
 
+	//创建长度为6，容量为8的切片
 	s22 := make([]int, 6, 8) // 使用 make 创建，指定 len 和 cap 值。
 	fmt.Printf("%v", s22)
 
@@ -79,6 +81,7 @@ func main() {
 	fmt.Printf("%v", s22)*/
 
 	data := [...]int{0, 1, 2, 3, 4, 10: 0}
+	fmt.Printf("%T", data)
 	//建立从data 角标0开始，长度为2，容量为3的切片
 	s := data[:2:3]
 
@@ -101,7 +104,7 @@ func main() {
 	fmt.Printf("slice s1 : %v\n", a1)
 	a2 := make([]int, 10)
 	fmt.Printf("slice s2 : %v\n", a2)
-	copy(a2, a1)
+	copy(a2, a1) // a1和a2是相互独立的，不会相互影响
 	fmt.Printf("copied slice s1 : %v\n", a1)
 	fmt.Printf("copied slice s2 : %v\n", a2)
 	a3 := []int{1, 2, 3}
@@ -121,10 +124,34 @@ func main() {
 	fmt.Printf("arrayA : %p , %v\n", &arrayA, arrayA)
 	fmt.Printf("arrayB : %p , %v\n", &arrayB, arrayB)
 
+	resize()
+
 }
 
 func testArrayPoint(x *[]int) {
 	fmt.Printf("func Array : %p , %v\n", x, *x)
 	(*x)[1] += 100
+
+}
+
+// slice扩容机制
+// 1.当容量小于1024时，每次扩容后，容量增加1倍
+// 2.当容量大于1024时，每次扩容容量增加25%，即为原来的1.25倍
+//如果扩容之后，还没有触及原数组的容量，那么，切片中的指针指向的位置，
+//就还是原数组，如果扩容之后，超过了原数组的容量，那么，Go就会开辟一块新的内存，
+//把原来的值拷贝过来，这种情况丝毫不会影响到原数组。
+func resize() {
+	slice := make([]int, 3, 20)
+	slice[0] = 10
+	slice[1] = 20
+	newSlice := append(append(append(slice, 50), 100), 150)
+	newSlice[1] += 1
+	fmt.Println(slice) //[10 21 0] 因为原来的切片容量为20，多次扩容后仍没有超过原切片的容量，指针还是指向原来的slice，原来的切片被改变
+
+	array := [4]int{10, 20, 30, 40}
+	slice2 := array[0:3]
+	slice2[1] = 50
+	fmt.Println(array)  //[10 50 30 40]
+	fmt.Println(slice2) //[10 50 30]
 
 }
