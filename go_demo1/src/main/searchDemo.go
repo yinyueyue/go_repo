@@ -11,16 +11,15 @@ func main() {
 
 //二分查找 实现
 func BinarySearch(arr *[]int, target int) int {
-
 	length := len(*arr)
-	low := 0
-	high := length - 1
-	for low <= high {
-		mid := (low + high) / 2
+	left := 0
+	right := length - 1
+	for left <= right {
+		mid := (left + right) / 2
 		if (*arr)[mid] > target {
-			high = mid - 1
+			right = mid - 1
 		} else if (*arr)[mid] < target {
-			low = mid + 1
+			left = mid + 1
 		} else {
 			return mid
 		}
