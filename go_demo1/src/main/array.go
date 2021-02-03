@@ -51,7 +51,7 @@ func main() {
 		sum += v
 		fmt.Println(v)
 	}
-	fmt.Printf("%d", sum)
+	fmt.Printf("%d\n", sum)
 	printA2Z()
 
 	maxNum([]int{12, 343, 5454, 65, 343, 32, 543, 5467568, 666})
