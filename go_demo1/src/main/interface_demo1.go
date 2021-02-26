@@ -38,6 +38,20 @@ func main() {
 	studentInfo["married"] = false
 	fmt.Println(studentInfo)
 
+	var a integer = 100
+	var b AInterface = a
+	b.SayHello()
+
+}
+
+type AInterface interface {
+	SayHello()
+}
+
+type integer int
+
+func (i integer) SayHello() {
+	fmt.Println("integer say hello ", i)
 }
 
 type Dog struct {
