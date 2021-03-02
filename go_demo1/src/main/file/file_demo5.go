@@ -1,7 +1,11 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
+	"io"
 	"io/ioutil"
+	"os"
 )
 
 /**
@@ -17,4 +21,27 @@ func main() {
 
 	_ = ioutil.WriteFile(targetFile, file, 1)
 
+	copyFile("D://demo1.txt", "D://demo4.txt")
+
+}
+
+/**
+拷贝文件
+*/
+func copyFile(srcFilePath string, destFilePath string) (written int64, err error) {
+	srcFile, err := os.Open(srcFilePath)
+
+	if err != nil {
+		fmt.Printf("open file error =%v", err)
+		return
+	}
+	defer srcFile.Close()
+
+	destFile, err := os.OpenFile(destFilePath, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 1)
+	if err != nil {
+		fmt.Printf("open file error =%v", err)
+		return
+	}
+	defer destFile.Close()
+	return io.Copy(bufio.NewWriter(destFile), bufio.NewReader(srcFile))
 }
