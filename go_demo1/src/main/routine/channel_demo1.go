@@ -30,6 +30,23 @@ func main() {
 
 	fmt.Printf("num2=%v,num3=%v\n", num2, num3)
 
-	num4 := <-intChan
-	fmt.Println(num4)
+	/*num4 := <-intChan
+	fmt.Println(num4)*/
+
+	intChan <- 100
+	intChan <- 200
+	intChan <- 300
+	intChan <- 400
+	intChan <- 500
+
+	//关闭管道， 通道关闭后不能再写入数据，但是可以继续读取
+	close(intChan)
+
+	//遍历管道，如果管道没有关闭，可以遍历完所有的数据，但是会报deadline错误
+
+	for v := range intChan {
+
+		fmt.Printf("v=%v", v)
+	}
+
 }
