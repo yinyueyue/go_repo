@@ -18,6 +18,8 @@ func AddUpper() func(int) int {
 	}
 }
 
+var map2 = make(map[int]int)
+
 // 匿名函数demo
 func main() {
 
