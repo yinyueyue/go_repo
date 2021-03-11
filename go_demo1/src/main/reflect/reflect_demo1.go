@@ -35,6 +35,43 @@ func main() {
 	fmt.Println(typeA.Name())
 	fmt.Printf("typeA 的分类1=%v\n", typeA.Kind())
 	fmt.Printf("typeA 的分类2=%v\n", v.Kind())
+	fmt.Printf("typeA 的类别=%v\n", v.Type())
+
+	/**
+		kind()是对象的分类，返回是一个常量值，
+	const (
+		Invalid Kind = iota
+		Bool
+		Int
+		Int8
+		Int16
+		Int32
+		Int64
+		Uint
+		Uint8
+		Uint16
+		Uint32
+		Uint64
+		Uintptr
+		Float32
+		Float64
+		Complex64
+		Complex128
+		Array
+		Chan
+		Func
+		Interface
+		Map
+		Ptr
+		Slice
+		String
+		Struct
+		UnsafePointer
+	)
+
+	Type()是对象的具体类别，返回
+	typeA 的类别=main.Student
+	*/
 
 	a := 10
 	aType := reflect.TypeOf(a)
